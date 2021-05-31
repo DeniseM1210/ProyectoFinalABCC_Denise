@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import modelo.Cliente;
+import modelo.CompraProducto;
 import modelo.Empleado;
 import modelo.Producto;
 
@@ -102,6 +103,22 @@ public class ConexionBD {
 		
 		return false;
 	}
+	
+	public static boolean ActualizarCompraProducto(CompraProducto cp) {
+		
+		try {
+			pstm = conexion.prepareStatement("UPDATE compra_producto set fecha = ?, nombre_producto = ?, cantidad = ?, color = ? WHERE clave_producto = '" + cp.getClaveProducto() + "'");
+			pstm.setString(1, cp.getFecha());
+			pstm.setString(2, cp.getNombreProducto());
+			pstm.setInt(3, cp.getCantidad());
+			pstm.setString(4, cp.getColor());
+		} catch (SQLException e) {
+			
+		}
+		
+		return false;
+	}
+	
 	
 	public static void main(String[] args) {
 	new ConexionBD();
