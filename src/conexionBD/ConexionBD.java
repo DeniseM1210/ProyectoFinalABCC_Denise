@@ -12,6 +12,7 @@ import modelo.CompraProducto;
 import modelo.Empleado;
 import modelo.Producto;
 import modelo.Proveedor;
+import modelo.PuestosTrabajo;
 
 public class ConexionBD {
 
@@ -139,6 +140,22 @@ public class ConexionBD {
 			return true;
 		} catch (SQLException e) {
 			
+		}
+		
+		return false;
+	}
+	
+	public static boolean ActualizarPuestosTrabajo(PuestosTrabajo pt) {
+		
+		try {
+			pstm = conexion.prepareStatement("UPDATE puestos_trabajo set nombre_puesto = ? WHERE id_puesto = '" + pt.getIdPuesto() + "'");
+			pstm.setString(1, pt.getNombrePuesto());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return false;
