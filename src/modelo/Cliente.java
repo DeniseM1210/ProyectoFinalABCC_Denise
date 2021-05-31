@@ -1,6 +1,7 @@
 package modelo;
 
 public class Cliente {
+	private int idCliente;
 	private String nombre;
 	private String correoE;
 	private int numTel;
@@ -8,7 +9,7 @@ public class Cliente {
 	
 	public Cliente() {}
 	
-	public Cliente(String nombre, String correoE, int numTel, String direccion) {
+	public Cliente(int idCliente, String nombre, String correoE, int numTel, String direccion) {
 		super();
 		this.nombre = nombre;
 		this.correoE = correoE;
@@ -46,6 +47,15 @@ public class Cliente {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	@Override

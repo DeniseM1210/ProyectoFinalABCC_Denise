@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import modelo.Cliente;
+import modelo.Empleado;
 import modelo.Producto;
 
 public class ConexionBD {
@@ -55,7 +56,7 @@ public class ConexionBD {
 	
 	public static boolean ActualizarProducto(Producto a) {
 		try {
-			pstm = conexion.prepareStatement("UPDATE Producto SET descripcion = ?, precio = ?, disponibilidad = ? where  clave_producto = '" + a.getClave() + "'");
+			pstm = conexion.prepareStatement("UPDATE producto SET descripcion = ?, precio = ?, disponibilidad = ? where  clave_producto = '" + a.getClave() + "'");
 			pstm.setString(1, a.getDescripcion());
 			pstm.setDouble(2, a.getPrecio());
 			pstm.setString(3, a.getDisponibilidad());
@@ -72,10 +73,11 @@ public class ConexionBD {
 	public static boolean ActualizarCliente(Cliente c) {
 		
 		try {
-			pstm = conexion.prepareStatement("UPDATE Cliente SET correo_electronico = ?, num_telefono = ?, direccion = ? WHERE nombre = '" + c.getNombre() + "'" );
-			pstm.setString(1, c.getCorreoE());
-			pstm.setInt(2, c.getNumTel());
-			pstm.setString(3, c.getDireccion());
+			pstm = conexion.prepareStatement("UPDATE cliente SET correo_electronico = ?, num_telefono = ?, direccion = ? WHERE id_cliente = '" + c.getIdCliente() + "'" );
+			pstm.setString(1, c.getNombre());
+			pstm.setString(2, c.getCorreoE());
+			pstm.setInt(3, c.getNumTel());
+			pstm.setString(4, c.getDireccion());
 			
 			pstm.executeUpdate();
 			return true;
@@ -86,7 +88,20 @@ public class ConexionBD {
 		return false;
 	}
 	
-	
+	public static boolean ActualizarEmpleado(Empleado e) {
+		
+		try {
+			pstm = conexion.prepareStatement("UPDATE empleado set RFC_empleado = ?, nombre = ?, apellidos = ?, id_puesto = ? WHERE id_empleado =  '" + e.getIdEmpleado() + "'");
+			pstm.setString(1, e.getRFCEmpleado());
+			pstm.setString(2, e.getNombre());
+			pstm.setString(3, e.getApellidos());
+			pstm.setInt(4, e.getIdPuesto());
+		} catch (SQLException e1) {
+			
+		}
+		
+		return false;
+	}
 	
 	public static void main(String[] args) {
 	new ConexionBD();

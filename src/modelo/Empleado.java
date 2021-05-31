@@ -1,6 +1,7 @@
 package modelo;
 
 public class Empleado {
+	private int idEmpleado;
 	private String RFCEmpleado;
 	private String Nombre;
 	private String Apellidos;
@@ -8,13 +9,29 @@ public class Empleado {
 	
 	public Empleado() {}
 	
-	public Empleado(String rFCEmpleado, String nombre, String apellidos, int idPuesto) {
+	
+
+	public Empleado(int idEmpleado, String rFCEmpleado, String nombre, String apellidos, int idPuesto) {
 		super();
+		this.idEmpleado = idEmpleado;
 		RFCEmpleado = rFCEmpleado;
 		Nombre = nombre;
 		Apellidos = apellidos;
 		this.idPuesto = idPuesto;
 	}
+
+
+	public int getIdEmpleado() {
+		return idEmpleado;
+	}
+
+
+
+	public void setIdEmpleado(int idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
+
+
 
 	public String getRFCEmpleado() {
 		return RFCEmpleado;
