@@ -11,6 +11,7 @@ import modelo.Cliente;
 import modelo.CompraProducto;
 import modelo.Empleado;
 import modelo.Producto;
+import modelo.Proveedor;
 
 public class ConexionBD {
 
@@ -97,6 +98,9 @@ public class ConexionBD {
 			pstm.setString(2, e.getNombre());
 			pstm.setString(3, e.getApellidos());
 			pstm.setInt(4, e.getIdPuesto());
+			
+			pstm.executeUpdate();
+			return true;
 		} catch (SQLException e1) {
 			
 		}
@@ -112,12 +116,34 @@ public class ConexionBD {
 			pstm.setString(2, cp.getNombreProducto());
 			pstm.setInt(3, cp.getCantidad());
 			pstm.setString(4, cp.getColor());
+			
+			pstm.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			
 		}
 		
 		return false;
 	}
+	
+	public static boolean ActualizarProveedor(Proveedor p) {
+		
+		try {
+			pstm = conexion.prepareStatement("UPDATE proveedor set nombre_proveedor = ?, num_telefono = ?, producto_provee = ?, cantidad_piezas = ? WHERE idProveedor =  '"+ p.getIdProveedor() + "'");
+			pstm.setString(1, p.getNombreProveedor());
+			pstm.setInt(2, p.getNumTelefono());
+			pstm.setString(3, p.getProducto());
+			pstm.setInt(4, p.getCantidadPiezas());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			
+		}
+		
+		return false;
+	}
+	
 	
 	
 	public static void main(String[] args) {
