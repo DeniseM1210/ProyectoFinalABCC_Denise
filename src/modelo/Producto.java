@@ -4,16 +4,14 @@ public class Producto {
 	private String clave;
 	private String descripcion;
 	private double precio;
-	private int cantidad;
-	private String color;
+	private String disponibilidad;
 	
-	public Producto(String clave, String descripcion, double precio, int cantidad, String color) {
+	public Producto(String clave, String descripcion, double precio, String disponibilidad) {
 		super();
 		this.clave = clave;
 		this.descripcion = descripcion;
 		this.precio = precio;
-		this.cantidad = cantidad;
-		this.color = color;
+		this.disponibilidad = disponibilidad;
 	}
 
 	public String getClave() {
@@ -40,27 +38,22 @@ public class Producto {
 		this.precio = precio;
 	}
 
-	public int getCantidad() {
-		return cantidad;
+
+	public String getDisponibilidad() {
+		return disponibilidad;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
+	public void setDisponibilidad(String diponibilidad) {
+		this.disponibilidad = disponibilidad;
 	}
 
 	@Override
 	public String toString() {
-		return "Producto [clave=" + clave + ", descripcion=" + descripcion + ", precio=" + precio + ", cantidad="
-				+ cantidad + ", color=" + color + "]";
+		return "Producto [clave=" + clave + ", descripcion=" + descripcion + ", precio=" + precio + ", disponibilidad="
+				+ disponibilidad + "]";
 	}
+
+	
 	
 	
 	
