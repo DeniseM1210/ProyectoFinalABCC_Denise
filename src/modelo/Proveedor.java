@@ -5,15 +5,17 @@ public class Proveedor {
 	private String nombreProveedor;
 	private int numTelefono;
 	private String producto;
+	private int cantidadPiezas;
 	
 	public Proveedor() {}
-	
-	public Proveedor(int idProveedor, String nombreProveedor, int numTelefono, String producto) {
+
+	public Proveedor(int idProveedor, String nombreProveedor, int numTelefono, String producto, int cantidadPiezas) {
 		super();
 		this.idProveedor = idProveedor;
 		this.nombreProveedor = nombreProveedor;
 		this.numTelefono = numTelefono;
 		this.producto = producto;
+		this.cantidadPiezas = cantidadPiezas;
 	}
 
 	public int getIdProveedor() {
@@ -48,12 +50,20 @@ public class Proveedor {
 		this.producto = producto;
 	}
 
+	public int getCantidadPiezas() {
+		return cantidadPiezas;
+	}
+
+	public void setCantidadPiezas(int cantidadPiezas) {
+		this.cantidadPiezas = cantidadPiezas;
+	}
+
 	@Override
 	public String toString() {
 		return "Proveedor [idProveedor=" + idProveedor + ", nombreProveedor=" + nombreProveedor + ", numTelefono="
-				+ numTelefono + ", producto=" + producto + "]";
+				+ numTelefono + ", producto=" + producto + ", cantidadPiezas=" + cantidadPiezas + "]";
 	}
 	
 	
-
+	
 }
