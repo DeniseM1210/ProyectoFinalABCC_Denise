@@ -267,7 +267,47 @@ class Interfaz extends JFrame implements ActionListener{
 					
 				}
 			});
-			
+		producto = new JMenu("Productos");
+			altasProd = new JMenuItem("Agregar Producto");
+			producto.add(altasProd);
+			altasProd.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			bajasProd = new JMenuItem("Eliminar Producto");
+			producto.add(bajasProd);
+			bajasProd.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			cambiosProd = new JMenuItem("Modificar Producto");
+			producto.add(cambiosProd);
+			cambiosProd.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			consultasProd = new JMenuItem("Buscar Producto");
+			producto.add(consultasProd);
+			consultasProd.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			
 		
 			
@@ -275,6 +315,7 @@ class Interfaz extends JFrame implements ActionListener{
 		menuBar.add(compraProducto);
 		menuBar.add(empleado);
 		menuBar.add(puestosTrabajo);
+		menuBar.add(producto);
 		setJMenuBar(menuBar);
 		
 		setVisible(true);
