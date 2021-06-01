@@ -29,7 +29,7 @@ import controlador.ProductoDAO;
 import controlador.ProveedorDAO;
 import controlador.PuestosTrabajoDAO;
 
-class Interfaz extends JFrame{
+class Interfaz extends JFrame implements ActionListener{
 	ConexionBD conexion = ConexionBD.getInstace();
 	ClienteDAO clDAO = ClienteDAO.getInstance();
 	CompraProductoDAO comProdDAO = CompraProductoDAO.getInstance();
@@ -63,6 +63,8 @@ class Interfaz extends JFrame{
 	JMenuItem altasPt, bajasPt, cambiosPt, consultasPt;
 	JInternalFrame if_altasPt, if_bajasPt, if_cambiosPt, if_consultasPt;
 	
+	JInternalFrame tablaCli, tablaComPro, tablaEmp, tablaPro, tablaProv, tablaPuesTra;
+	
 	ImageIcon iconoAgregar = new ImageIcon("./archivos/anadir.png");
 	ImageIcon iconoBorrar = new ImageIcon("./archivos/eliminar.png");
 	ImageIcon iconoLimpiar = new ImageIcon("./archivos/limpio.png");
@@ -90,9 +92,68 @@ class Interfaz extends JFrame{
 		setTitle("Talabarteria Estrella");
 		setLocationRelativeTo(null);
 		
+		tablaCli = new JInternalFrame();
+		tablaCli.getContentPane().setLayout(null);
+		tablaCli.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		tablaCli.setSize(567, 137);
+		tablaCli.setLocation(0, 290);
+		tablaCli.setTitle("Tabla Cliente");
 		
+		
+		menuBar = new JMenuBar();
+		cliente = new JMenu("Cliente");
+			altasCli = new JMenuItem("Añadir Cliente");
+			cliente.add(altasCli);
+			altasCli.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			bajasCli = new JMenuItem("Eliminar Cliente");
+			cliente.add(bajasCli);
+			bajasCli.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			cambiosCli = new JMenuItem("Modificar Cliente");
+			cliente.add(cambiosCli);
+			cambiosCli.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			consultasCli = new JMenuItem("Buscar Cliente");
+			cliente.add(consultasCli);
+			consultasCli.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
+		menuBar.add(cliente);
+		setJMenuBar(menuBar);
 		
 		setVisible(true);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
@@ -166,7 +227,7 @@ public class VentanaInicio {
 			
 			@Override
 			public void run() {
-				new Login();
+				new Interfaz();
 				
 			}
 		});
