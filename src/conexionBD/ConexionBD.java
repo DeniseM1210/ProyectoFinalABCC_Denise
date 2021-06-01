@@ -39,6 +39,14 @@ public class ConexionBD {
 		}
 	}
 	
+	
+	public static synchronized ConexionBD getInstace() {
+		if(conexionBD == null) {
+			new ConexionBD();
+		}
+		return conexionBD;
+	}
+	
 	public static Connection getConexion() {
 		if(conexion == null) {
 			new ConexionBD();
@@ -56,6 +64,19 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 	}
+	
+	public static boolean eliminarRegistro(String sql) {
+		try {
+			String consulta = sql;
+			pstm = conexion.prepareStatement(consulta);
+			pstm.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			
+		}
+		return false;
+	}
+	
 	
 	public static boolean actualizarProducto(Producto a) {
 		try {
