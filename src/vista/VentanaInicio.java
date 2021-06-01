@@ -308,14 +308,53 @@ class Interfaz extends JFrame implements ActionListener{
 					
 				}
 			});
-			
-		
-			
+		proveedor = new JMenu("Proveedores");
+			altasProv = new JMenuItem("Agregar Proveedor");
+			proveedor.add(altasProv);
+			altasProv.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			bajasProv = new JMenuItem("Eliminar Proveedor");
+			proveedor.add(bajasProv);
+			bajasProv.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			cambiosProv = new JMenuItem("Modificar Proveedor");
+			proveedor.add(cambiosProv);
+			cambiosProv.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			consultasProv = new JMenuItem("Buscar Proveedor");
+			proveedor.add(consultasProv);
+			consultasProv.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		menuBar.add(cliente);
 		menuBar.add(compraProducto);
 		menuBar.add(empleado);
 		menuBar.add(puestosTrabajo);
 		menuBar.add(producto);
+		menuBar.add(proveedor);
 		setJMenuBar(menuBar);
 		
 		setVisible(true);
