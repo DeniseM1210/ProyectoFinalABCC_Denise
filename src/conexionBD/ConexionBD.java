@@ -196,6 +196,23 @@ public class ConexionBD {
 		return false;
 	}
 	
+	public static boolean agregarEmpleado(Empleado e) {
+		
+		try {
+			pstm = conexion.prepareStatement("INSERT INTO empleado VALUES(" + e.getIdEmpleado() + ", ?, ?, ?, ?)");
+			pstm.setString(1, e.getRFCEmpleado());
+			pstm.setString(2, e.getNombre());
+			pstm.setString(3, e.getApellidos());
+			pstm.setInt(4, e.getIdPuesto());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e1) {
+			
+		}
+		
+		return false;
+	}
 	
 	
 	public static void main(String[] args) {
