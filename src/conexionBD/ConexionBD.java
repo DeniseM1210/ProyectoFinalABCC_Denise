@@ -214,6 +214,23 @@ public class ConexionBD {
 		return false;
 	}
 	
+	public static boolean agregarProducto(Producto p) {
+		
+		try {
+			pstm = conexion.prepareStatement("INSERT INTO producto VALUES(" + p.getClave() + ", ?, ?, ?)");
+			pstm.setString(1, p.getDescripcion());
+			pstm.setDouble(2, p.getPrecio());
+			pstm.setString(3, p.getDisponibilidad());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			
+		}
+		
+		return false;
+	}
+	
 	
 	public static void main(String[] args) {
 	new ConexionBD();
