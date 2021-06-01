@@ -90,5 +90,17 @@ public class ProductoDAO{
 		return resultado;
 	}
 	
+	public synchronized ArrayList<Producto> buscarProductos(String filtro){
+		ConsultaProductos cp = new ConsultaProductos(filtro);
+		Thread h1 = new Thread(cp);
+		h1.start();
+		try {
+			h1.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return cp.getListaProductos();
+	}
+	
 
 }
