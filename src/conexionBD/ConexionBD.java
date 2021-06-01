@@ -249,6 +249,20 @@ public class ConexionBD {
 		return false;
 	}
 	
+	public static boolean agregarPuestosTrabajo(PuestosTrabajo pt) {
+		
+		try {
+			pstm = conexion.prepareStatement("INSERT INTO puestos_trabajo VALUES(" + pt.getIdPuesto() + "?)");
+			pstm.setString(1, pt.getNombrePuesto());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			
+		}
+		
+		return false;
+	}
 	
 	public static void main(String[] args) {
 	new ConexionBD();
