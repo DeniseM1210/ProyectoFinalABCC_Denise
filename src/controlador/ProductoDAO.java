@@ -24,6 +24,11 @@ public class ProductoDAO{
 		return resultado;
 	}
 	
-	
+	public boolean eliminarRegistro(int idProducto) {
+		boolean resultado = false;
+		String sql = "DELETE FROM producto WHERE clave_producto = " + idProducto;
+		resultado = ConexionBD.eliminarRegistro(sql);
+		return resultado;
+	}
 
 }
