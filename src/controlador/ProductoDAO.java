@@ -1,22 +1,29 @@
 package controlador;
 
 import conexionBD.ConexionBD;
+import modelo.Producto;
 
-public class ProductoDAO implements Runnable{
+public class ProductoDAO{
 	
-	ConexionBD conexion;
+	private static ProductoDAO productoDAO = null;
 	
-	public ProductoDAO() {
-		conexion = new ConexionBD();
-	}
-	
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	private ProductoDAO() {
 		
 	}
-
+	
+	public static synchronized ProductoDAO getInstance() {
+		if(productoDAO == null) {
+			productoDAO = new ProductoDAO();
+		}
+		return productoDAO;
+	}
+	
+	public boolean insertarProducto(Producto p) {
+		boolean resultado = false;
+		resultado = ConexionBD.agregarProducto(p);
+		return resultado;
+	}
+	
 	
 
 }
