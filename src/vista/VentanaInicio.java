@@ -184,10 +184,53 @@ class Interfaz extends JFrame implements ActionListener{
 					
 				}
 			});
+			
+		empleado = new JMenu("Empleado");
+			altasEmp = new JMenuItem("Agregar Empleado");
+			empleado.add(altasEmp);
+			altasEmp.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			bajasEmp = new JMenuItem("Eliminar Empleado");
+			empleado.add(bajasEmp);
+			bajasEmp.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			cambiosEmp = new JMenuItem("Modificar Empleado");
+			empleado.add(cambiosEmp);
+			cambiosEmp.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			consultasEmp = new JMenuItem("Buscar Empleado");
+			empleado.add(consultasEmp);
+			consultasEmp.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		
 			
 		menuBar.add(cliente);
 		menuBar.add(compraProducto);
+		menuBar.add(empleado);
 		setJMenuBar(menuBar);
 		
 		setVisible(true);
