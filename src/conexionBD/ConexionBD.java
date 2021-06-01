@@ -77,6 +77,18 @@ public class ConexionBD {
 		return false;
 	}
 	
+	public static ResultSet ejecutarConsulta(String sql) {
+		try {
+			String consulta = sql;
+			pstm = conexion.prepareStatement(consulta);
+			return pstm.executeQuery();
+		} catch (Exception e) {
+			
+		}
+		
+		return null;
+	}
+	
 	
 	public static boolean actualizarProducto(Producto a) {
 		try {
