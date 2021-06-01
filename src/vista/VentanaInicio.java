@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -29,6 +32,83 @@ import controlador.ProductoDAO;
 import controlador.ProveedorDAO;
 import controlador.PuestosTrabajoDAO;
 
+
+class AltasCliente extends JInternalFrame{
+	JTextField cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion;
+	JButton btnAgregar, btnBorrar, btnCancelar;
+	
+	ImageIcon iconoAgregar = new ImageIcon("./archivos/anadir.png");
+	ImageIcon iconoLimpiar = new ImageIcon("./archivos/limpio.png");
+	ImageIcon iconoCancelar = new ImageIcon("./archivos/cancelar.png");
+	
+	JTable tablaClientes = new JTable(4, 4);
+	
+	public AltasCliente() {
+		getContentPane().setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(567,290);
+		this.getContentPane().setBackground(Color.LIGHT_GRAY);
+		setTitle("Altas Clientes");
+		
+		JLabel lblTexto = new JLabel("Altas Clientes");
+		lblTexto.setBounds(200, 20, 200, 20);
+		lblTexto.setFont(new Font("Arial", Font.BOLD, 18));
+		add(lblTexto);
+		
+		JLabel lblIdCliente = new JLabel("Id Cliente: ");
+		lblIdCliente.setBounds(20, 50, 100, 20);
+		add(lblIdCliente);
+		JLabel lblNombre = new JLabel("Nombre: ");
+		lblNombre.setBounds(20, 80, 100, 20);
+		add(lblNombre);
+		JLabel lblCorreo = new JLabel("Correo Electronico: ");
+		lblCorreo.setBounds(20, 110, 150, 20);
+		add(lblCorreo);
+		JLabel lblNumTel = new JLabel("Num. Telefono: ");
+		lblNumTel.setBounds(20, 140, 100, 20);
+		add(lblNumTel);
+		JLabel lblDireccion = new JLabel("Direccion: ");
+		lblDireccion.setBounds(20, 170, 100, 20);
+		add(lblDireccion);
+		
+		cajaidCliente = new JTextField();
+		cajaidCliente.setBounds(90, 50, 200, 20);
+		add(cajaidCliente);
+		cajaNombre = new JTextField();
+		cajaNombre.setBounds(90, 80, 200, 20);
+		add(cajaNombre);
+		cajaCorreo = new JTextField();
+		cajaCorreo.setBounds(130, 110, 160, 20);
+		add(cajaCorreo);
+		cajaNumTel = new JTextField();
+		cajaNumTel.setBounds(110, 140, 180, 20);
+		add(cajaNumTel);
+		cajaDireccion = new JTextField();
+		cajaDireccion.setBounds(90, 170, 200, 20);
+		add(cajaDireccion);
+		
+		btnAgregar = new JButton(iconoAgregar);
+		btnAgregar.setIcon(new ImageIcon(iconoAgregar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+		btnAgregar.setBounds(380, 30, 50, 50);
+		btnAgregar.setBackground(Color.LIGHT_GRAY);
+		add(btnAgregar);
+		
+		btnBorrar = new JButton(iconoLimpiar);
+		btnBorrar.setIcon(new ImageIcon(iconoLimpiar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+		btnBorrar.setBounds(380, 90, 50, 50);
+		btnBorrar.setBackground(Color.LIGHT_GRAY);
+		add(btnBorrar);
+		
+		btnCancelar = new JButton(iconoCancelar);
+		btnCancelar.setIcon(new ImageIcon(iconoCancelar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+		btnCancelar.setBounds(380, 150, 50, 50);
+		btnCancelar.setBackground(Color.LIGHT_GRAY);
+		add(btnCancelar);
+		
+		setVisible(false);
+	}
+}
+
 class Interfaz extends JFrame implements ActionListener{
 	ConexionBD conexion = ConexionBD.getInstace();
 	ClienteDAO clDAO = ClienteDAO.getInstance();
@@ -41,48 +121,27 @@ class Interfaz extends JFrame implements ActionListener{
 	JMenuBar menuBar = new JMenuBar();
 	JMenu cliente = new JMenu("Cliente");
 	JMenuItem altasCli, bajasCli, cambiosCli, consultasCli;
-	JInternalFrame if_altasCli, if_bajasCli, if_cambiosCli, if_consultasCli;
 	
 	JMenu compraProducto = new JMenu("Compra de Producto");
 	JMenuItem altasCom, bajasCom, cambiosCom, consultasCom;
-	JInternalFrame if_altasCom, if_bajasCom, if_cambiosCom, if_consultasCom;
 	
 	JMenu empleado = new JMenu("Empleado");
 	JMenuItem altasEmp, bajasEmp, cambiosEmp, consultasEmp;
-	JInternalFrame if_altasEmp, if_bajasEmp, if_cambiosEmp, if_consultasEmp;
 	
 	JMenu producto = new JMenu("Producto");
 	JMenuItem altasProd, bajasProd, cambiosProd, consultasProd;
-	JInternalFrame if_altasProd, if_bajasProd, if_cambiosProd, if_consultasProd;
 	
 	JMenu proveedor = new JMenu("Proveedor");
 	JMenuItem altasProv, bajasProv, cambiosProv, consultasProv;
-	JInternalFrame if_altasProv, if_bajasProv, if_cambiosProv, if_consultasProv; 
 	
 	JMenu puestosTrabajo = new JMenu("Puestos de Trabajo");
 	JMenuItem altasPt, bajasPt, cambiosPt, consultasPt;
-	JInternalFrame if_altasPt, if_bajasPt, if_cambiosPt, if_consultasPt;
 	
-	JInternalFrame tablaCli, tablaComPro, tablaEmp, tablaPro, tablaProv, tablaPuesTra;
-	
-	ImageIcon iconoAgregar = new ImageIcon("./archivos/anadir.png");
-	ImageIcon iconoBorrar = new ImageIcon("./archivos/eliminar.png");
-	ImageIcon iconoLimpiar = new ImageIcon("./archivos/limpio.png");
 	ImageIcon iconoEliminar = new ImageIcon("./archivos/eliminar.png");
 	ImageIcon iconoBuscar = new ImageIcon("./archivos/lupa.png");
 	ImageIcon iconoGuardar = new ImageIcon("./archivos/guardar.png");
 	
-	JButton btnAgregar, btnBorrar, btnLimpiar, btnEliminar, btnBuscar, btnGuardar;
-	JTextField cajaNombre, cajaidCliente, cajaCorreoE, cajaNumTel, cajaDireccion,
-	cajaClaveProducto, cajaFecha, cajaNombreProd, cajaColor, cajaIdEmp, cajaRFC,
-	cajaApellido, cajaIdPuesto, cajaDescripcion, cajaPrecio, cajaIdProveedor, cajaProductoProvee,
-	cajaNombrePuesto;
-	
-	JComboBox comboCantidad, comboDisponibilidad;
-	
-	JTable tablaCliente, tablaCompraProducto, tablaEmpleado, tablaProducto,
-	tablaProveedor, tablaPuestosTrabajo;
-	JScrollPane sp = new JScrollPane();
+	JDesktopPane dp = new JDesktopPane();
 	
 	
 	public Interfaz() {
@@ -92,110 +151,49 @@ class Interfaz extends JFrame implements ActionListener{
 		setTitle("Talabarteria Estrella");
 		setLocationRelativeTo(null);
 		
-		tablaCli = new JInternalFrame();
-		tablaCli.getContentPane().setLayout(null);
-		tablaCli.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		tablaCli.setSize(567, 137);
-		tablaCli.setLocation(0, 290);
-		tablaCli.setTitle("Tabla Cliente");
 		
 		
+	
 		menuBar = new JMenuBar();
 		cliente = new JMenu("Cliente");
 			altasCli = new JMenuItem("Añadir Cliente");
 			cliente.add(altasCli);
-			altasCli.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			altasCli.addActionListener(this);
+	
 			bajasCli = new JMenuItem("Eliminar Cliente");
 			cliente.add(bajasCli);
-			bajasCli.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			bajasCli.addActionListener(this);
+			
 			cambiosCli = new JMenuItem("Modificar Cliente");
 			cliente.add(cambiosCli);
-			cambiosCli.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			cambiosCli.addActionListener(this);
+			
 			consultasCli = new JMenuItem("Buscar Cliente");
 			cliente.add(consultasCli);
-			consultasCli.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			consultasCli.addActionListener(this);
 		
 		compraProducto = new JMenu("Compra de Producto");
 			altasCom = new JMenuItem("Agregar Compra");
 			compraProducto.add(altasCom);
-			altasCom.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			altasCom.addActionListener(this);
+			
 			bajasCom = new JMenuItem("Eliminar Compra");
 			compraProducto.add(bajasCom);
-			bajasCom.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			bajasCom.addActionListener(this);
+			
 			cambiosCom = new JMenuItem("Modificar Compra");
 			compraProducto.add(cambiosCom);
-			cambiosCom.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			cambiosCom.addActionListener(this);
+			
 			consultasCom = new JMenuItem("Buscar Compra");
 			compraProducto.add(consultasCom);
-			consultasCom.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			consultasCom.addActionListener(this);
 			
 		empleado = new JMenu("Empleado");
 			altasEmp = new JMenuItem("Agregar Empleado");
 			empleado.add(altasEmp);
-			altasEmp.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			altasEmp.addActionListener(this);
+			
 			bajasEmp = new JMenuItem("Eliminar Empleado");
 			empleado.add(bajasEmp);
 			bajasEmp.addActionListener(new ActionListener() {
@@ -357,15 +355,25 @@ class Interfaz extends JFrame implements ActionListener{
 		menuBar.add(proveedor);
 		setJMenuBar(menuBar);
 		
+		dp.setBounds(0, 0, 567, 425);
+		add(dp);
+		
 		setVisible(true);
 	}
+	
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == altasCli) {
+			AltasCliente ac = new AltasCliente();
+			dp.add(ac);
+			ac.setVisible(true);
+			add(dp);
+		}
 		
 	}
+	
 	
 }
 
