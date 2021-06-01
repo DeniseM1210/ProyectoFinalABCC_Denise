@@ -231,6 +231,24 @@ public class ConexionBD {
 		return false;
 	}
 	
+	public static boolean agregarProveedor(Proveedor p) {
+		
+		try {
+			pstm = conexion.prepareStatement("INSERT INTO proveedor VALUES(" + p.getIdProveedor() + ", ?, ?, ?, ?) ");
+			pstm.setString(1, p.getNombreProveedor());
+			pstm.setInt(2, p.getNumTelefono());
+			pstm.setString(3, p.getProducto());
+			pstm.setInt(4, p.getCantidadPiezas());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			
+		}
+		
+		return false;
+	}
+	
 	
 	public static void main(String[] args) {
 	new ConexionBD();
