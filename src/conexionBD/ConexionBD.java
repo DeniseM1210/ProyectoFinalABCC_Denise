@@ -57,7 +57,7 @@ public class ConexionBD {
 		}
 	}
 	
-	public static boolean ActualizarProducto(Producto a) {
+	public static boolean actualizarProducto(Producto a) {
 		try {
 			pstm = conexion.prepareStatement("UPDATE producto SET descripcion = ?, precio = ?, disponibilidad = ? where  clave_producto = '" + a.getClave() + "'");
 			pstm.setString(1, a.getDescripcion());
@@ -73,7 +73,7 @@ public class ConexionBD {
 		
 	}
 	
-	public static boolean ActualizarCliente(Cliente c) {
+	public static boolean actualizarCliente(Cliente c) {
 		
 		try {
 			pstm = conexion.prepareStatement("UPDATE cliente SET correo_electronico = ?, num_telefono = ?, direccion = ? WHERE id_cliente = '" + c.getIdCliente() + "'" );
@@ -91,7 +91,7 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean ActualizarEmpleado(Empleado e) {
+	public static boolean actualizarEmpleado(Empleado e) {
 		
 		try {
 			pstm = conexion.prepareStatement("UPDATE empleado set RFC_empleado = ?, nombre = ?, apellidos = ?, id_puesto = ? WHERE id_empleado =  '" + e.getIdEmpleado() + "'");
@@ -109,7 +109,7 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean ActualizarCompraProducto(CompraProducto cp) {
+	public static boolean actualizarCompraProducto(CompraProducto cp) {
 		
 		try {
 			pstm = conexion.prepareStatement("UPDATE compra_producto set fecha = ?, nombre_producto = ?, cantidad = ?, color = ? WHERE clave_producto = '" + cp.getClaveProducto() + "'");
@@ -127,7 +127,7 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean ActualizarProveedor(Proveedor p) {
+	public static boolean actualizarProveedor(Proveedor p) {
 		
 		try {
 			pstm = conexion.prepareStatement("UPDATE proveedor set nombre_proveedor = ?, num_telefono = ?, producto_provee = ?, cantidad_piezas = ? WHERE idProveedor =  '"+ p.getIdProveedor() + "'");
@@ -145,7 +145,7 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean ActualizarPuestosTrabajo(PuestosTrabajo pt) {
+	public static boolean actualizarPuestosTrabajo(PuestosTrabajo pt) {
 		
 		try {
 			pstm = conexion.prepareStatement("UPDATE puestos_trabajo set nombre_puesto = ? WHERE id_puesto = '" + pt.getIdPuesto() + "'");
@@ -154,8 +154,25 @@ public class ConexionBD {
 			pstm.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+		}
+		
+		return false;
+	}
+	
+	public static boolean agregarCliente(Cliente c) {
+		
+		try {
+			pstm = conexion.prepareStatement("INSERT INTO cliente VALUES(" + c.getIdCliente()+ ", ?, ?, ?, ?)");
+			pstm.setString(1, c.getNombre());
+			pstm.setString(2, c.getCorreoE());
+			pstm.setInt(3, c.getNumTel());
+			pstm.setString(4, c.getDireccion());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			
 		}
 		
 		return false;
