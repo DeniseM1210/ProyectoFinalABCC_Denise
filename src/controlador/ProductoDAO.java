@@ -83,6 +83,12 @@ public class ProductoDAO{
 		return resultado;
 	}
 	
+	public boolean modificarProducto(Producto p, boolean flags[]) {
+		boolean resultado = false;
+		resultado = ConexionBD.actualizarProducto(p);
+		
+		return resultado;
+	}
 	
 
 }
