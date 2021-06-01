@@ -178,6 +178,24 @@ public class ConexionBD {
 		return false;
 	}
 	
+	public static boolean agregarCompraProducto(CompraProducto cp) {
+		
+		try {
+			pstm = conexion.prepareStatement("INSERT INTO compra_producto VALUES(" + cp.getClaveProducto() + ", ?, ?, ?, ?)");
+			pstm.setString(1, cp.getFecha());
+			pstm.setString(2, cp.getNombreProducto());
+			pstm.setInt(3, cp.getCantidad());
+			pstm.setString(4, cp.getColor());
+			
+			pstm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			
+		}
+		
+		return false;
+	}
+	
 	
 	
 	public static void main(String[] args) {
