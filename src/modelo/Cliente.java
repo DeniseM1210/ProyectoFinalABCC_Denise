@@ -4,12 +4,12 @@ public class Cliente {
 	private int idCliente;
 	private String nombre;
 	private String correoE;
-	private int numTel;
+	private long numTel;
 	private String direccion;
 	
 	public Cliente() {}
 	
-	public Cliente(int idCliente, String nombre, String correoE, int numTel, String direccion) {
+	public Cliente(int idCliente, String nombre, String correoE, long numTel, String direccion) {
 		super();
 		this.nombre = nombre;
 		this.correoE = correoE;
@@ -33,7 +33,7 @@ public class Cliente {
 		this.correoE = correoE;
 	}
 
-	public int getNumTel() {
+	public long getNumTel() {
 		return numTel;
 	}
 

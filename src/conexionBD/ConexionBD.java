@@ -9,10 +9,7 @@ import java.sql.SQLException;
 
 import modelo.Cliente;
 import modelo.CompraProducto;
-import modelo.Empleado;
 import modelo.Producto;
-import modelo.Proveedor;
-import modelo.PuestosTrabajo;
 
 public class ConexionBD {
 
@@ -112,7 +109,7 @@ public class ConexionBD {
 			pstm = conexion.prepareStatement("UPDATE cliente SET correo_electronico = ?, num_telefono = ?, direccion = ? WHERE id_cliente = '" + c.getIdCliente() + "'" );
 			pstm.setString(1, c.getNombre());
 			pstm.setString(2, c.getCorreoE());
-			pstm.setInt(3, c.getNumTel());
+			pstm.setLong(3, c.getNumTel());
 			pstm.setString(4, c.getDireccion());
 			
 			pstm.executeUpdate();
@@ -124,23 +121,6 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean actualizarEmpleado(Empleado e) {
-		
-		try {
-			pstm = conexion.prepareStatement("UPDATE empleado set RFC_empleado = ?, nombre = ?, apellidos = ?, id_puesto = ? WHERE id_empleado =  '" + e.getIdEmpleado() + "'");
-			pstm.setString(1, e.getRFCEmpleado());
-			pstm.setString(2, e.getNombre());
-			pstm.setString(3, e.getApellidos());
-			pstm.setInt(4, e.getIdPuesto());
-			
-			pstm.executeUpdate();
-			return true;
-		} catch (SQLException e1) {
-			
-		}
-		
-		return false;
-	}
 	
 	public static boolean actualizarCompraProducto(CompraProducto cp) {
 		
@@ -160,46 +140,13 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean actualizarProveedor(Proveedor p) {
-		
-		try {
-			pstm = conexion.prepareStatement("UPDATE proveedor set nombre_proveedor = ?, num_telefono = ?, producto_provee = ?, cantidad_piezas = ? WHERE idProveedor =  '"+ p.getIdProveedor() + "'");
-			pstm.setString(1, p.getNombreProveedor());
-			pstm.setInt(2, p.getNumTelefono());
-			pstm.setString(3, p.getProducto());
-			pstm.setInt(4, p.getCantidadPiezas());
-			
-			pstm.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			
-		}
-		
-		return false;
-	}
-	
-	public static boolean actualizarPuestosTrabajo(PuestosTrabajo pt) {
-		
-		try {
-			pstm = conexion.prepareStatement("UPDATE puestos_trabajo set nombre_puesto = ? WHERE id_puesto = '" + pt.getIdPuesto() + "'");
-			pstm.setString(1, pt.getNombrePuesto());
-			
-			pstm.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			
-		}
-		
-		return false;
-	}
-	
 	public static boolean agregarCliente(Cliente c) {
 		
 		try {
 			pstm = conexion.prepareStatement("INSERT INTO cliente VALUES(" + c.getIdCliente()+ ", ?, ?, ?, ?)");
 			pstm.setString(1, c.getNombre());
 			pstm.setString(2, c.getCorreoE());
-			pstm.setInt(3, c.getNumTel());
+			pstm.setLong(3, c.getNumTel());
 			pstm.setString(4, c.getDireccion());
 			
 			pstm.executeUpdate();
@@ -229,24 +176,6 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean agregarEmpleado(Empleado e) {
-		
-		try {
-			pstm = conexion.prepareStatement("INSERT INTO empleado VALUES(" + e.getIdEmpleado() + ", ?, ?, ?, ?)");
-			pstm.setString(1, e.getRFCEmpleado());
-			pstm.setString(2, e.getNombre());
-			pstm.setString(3, e.getApellidos());
-			pstm.setInt(4, e.getIdPuesto());
-			
-			pstm.executeUpdate();
-			return true;
-		} catch (SQLException e1) {
-			
-		}
-		
-		return false;
-	}
-	
 	public static boolean agregarProducto(Producto p) {
 		
 		try {
@@ -264,38 +193,6 @@ public class ConexionBD {
 		return false;
 	}
 	
-	public static boolean agregarProveedor(Proveedor p) {
-		
-		try {
-			pstm = conexion.prepareStatement("INSERT INTO proveedor VALUES(" + p.getIdProveedor() + ", ?, ?, ?, ?) ");
-			pstm.setString(1, p.getNombreProveedor());
-			pstm.setInt(2, p.getNumTelefono());
-			pstm.setString(3, p.getProducto());
-			pstm.setInt(4, p.getCantidadPiezas());
-			
-			pstm.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			
-		}
-		
-		return false;
-	}
-	
-	public static boolean agregarPuestosTrabajo(PuestosTrabajo pt) {
-		
-		try {
-			pstm = conexion.prepareStatement("INSERT INTO puestos_trabajo VALUES(" + pt.getIdPuesto() + "?)");
-			pstm.setString(1, pt.getNombrePuesto());
-			
-			pstm.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			
-		}
-		
-		return false;
-	}
 	
 	public static void main(String[] args) {
 	new ConexionBD();
