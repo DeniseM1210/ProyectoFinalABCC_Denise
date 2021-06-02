@@ -69,7 +69,7 @@ public class ConexionBD {
 			pstm.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			
+			System.out.println(e.toString());
 		}
 		return false;
 	}
@@ -109,7 +109,7 @@ public class ConexionBD {
 			pstm = conexion.prepareStatement("UPDATE cliente SET correo_electronico = ?, num_telefono = ?, direccion = ? WHERE id_cliente = '" + c.getIdCliente() + "'" );
 			pstm.setString(1, c.getNombre());
 			pstm.setString(2, c.getCorreoE());
-			pstm.setLong(3, c.getNumTel());
+			pstm.setString(3, c.getNumTel());
 			pstm.setString(4, c.getDireccion());
 			
 			pstm.executeUpdate();
@@ -146,7 +146,7 @@ public class ConexionBD {
 			pstm = conexion.prepareStatement("INSERT INTO cliente VALUES(" + c.getIdCliente()+ ", ?, ?, ?, ?)");
 			pstm.setString(1, c.getNombre());
 			pstm.setString(2, c.getCorreoE());
-			pstm.setLong(3, c.getNumTel());
+			pstm.setString(3, c.getNumTel());
 			pstm.setString(4, c.getDireccion());
 			
 			pstm.executeUpdate();

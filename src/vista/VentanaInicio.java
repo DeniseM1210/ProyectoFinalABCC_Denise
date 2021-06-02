@@ -172,8 +172,7 @@ class AltasCliente extends JInternalFrame implements ActionListener{
 		if(e.getSource() == btnAgregar) {
 			if(validarCajasVacias()) {
 				int id = Integer.parseInt(cajaidCliente.getText());
-				long numTel = Long.parseLong(cajaNumTel.getText());
-				Cliente c = new Cliente(id, cajaNombre.getText(), cajaCorreo.getText(), numTel, cajaDireccion.getText());
+				Cliente c = new Cliente(id, cajaNombre.getText(), cajaCorreo.getText(), cajaNumTel.getText(), cajaDireccion.getText());
 				if(ConexionBD.agregarCliente(c)) {
 					JOptionPane.showMessageDialog(null, "Se agrego el cliente correctamente");
 					actualizarTabla();
@@ -236,14 +235,15 @@ class AltasCliente extends JInternalFrame implements ActionListener{
 	}
 }//Class altasClientes
 
-class BajasClientes extends JFrame implements ActionListener{
+class BajasClientes extends JInternalFrame implements ActionListener{
 	JTextField cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion;
-	JButton btnEliminar, btnBorrar, btnCancelar;
+	JButton btnEliminar, btnBorrar, btnCancelar, btnBuscar;
 	
 	ImageIcon iconoEliminar = new ImageIcon("./archivos/eliminar.png");
 	ImageIcon iconoLimpiar = new ImageIcon("./archivos/limpio.png");
 	ImageIcon iconoCancelar = new ImageIcon("./archivos/cancelar.png");
 	ImageIcon iconoBorrarUsu = new ImageIcon("./archivos/borrarUsu.png");
+	ImageIcon iconoBuscar = new ImageIcon("./archivos/lupa.png");
 	
 	JTable tablaClientes = new JTable(5,5);
 	
@@ -255,7 +255,7 @@ class BajasClientes extends JFrame implements ActionListener{
 		setTitle("Bajas Clientes");
 		
 		JLabel lblImagen = new JLabel(iconoBorrarUsu);
-		lblImagen.setBounds(150, 20, 30, 30);
+		lblImagen.setBounds(170, 10, 30, 30);
 		lblImagen.setIcon(new ImageIcon(iconoBorrarUsu.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		add(lblImagen);
 		
@@ -296,30 +296,37 @@ class BajasClientes extends JFrame implements ActionListener{
 		cajaDireccion.setBounds(90, 170, 200, 20);
 		add(cajaDireccion);
 		
+		btnBuscar = new JButton(iconoBuscar);
+		btnBuscar.setIcon(new ImageIcon(iconoBuscar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+		btnBuscar.setBounds(380, 30, 50, 50);
+		btnBuscar.setBackground(Color.LIGHT_GRAY);
+		btnBuscar.addActionListener(this);
+		add(btnBuscar);
+		
 		btnEliminar = new JButton(iconoEliminar);
 		btnEliminar.setIcon(new ImageIcon(iconoEliminar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-		btnEliminar.setBounds(380, 30, 50, 50);
+		btnEliminar.setBounds(380, 90, 50, 50);
 		btnEliminar.setBackground(Color.LIGHT_GRAY);
 		btnEliminar.addActionListener(this);
 		add(btnEliminar);
 		
 		btnBorrar = new JButton(iconoLimpiar);
 		btnBorrar.setIcon(new ImageIcon(iconoLimpiar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-		btnBorrar.setBounds(380, 90, 50, 50);
+		btnBorrar.setBounds(380, 150, 50, 50);
 		btnBorrar.setBackground(Color.LIGHT_GRAY);
 		btnBorrar.addActionListener(this);
 		add(btnBorrar);
 		
 		btnCancelar = new JButton(iconoCancelar);
 		btnCancelar.setIcon(new ImageIcon(iconoCancelar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-		btnCancelar.setBounds(380, 150, 50, 50);
+		btnCancelar.setBounds(380, 210, 50, 50);
 		btnCancelar.setBackground(Color.LIGHT_GRAY);
 		btnCancelar.addActionListener(this);
 		add(btnCancelar);
 		
 		actualizarTabla();
 		JScrollPane sp = new JScrollPane(tablaClientes);
-		sp.setBounds(0, 250, 567, 100);
+		sp.setBounds(0, 280, 550, 100);
 		add(sp);
 		
 		//Validacion
@@ -377,20 +384,31 @@ class BajasClientes extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnEliminar) {
-			if(validarCajasVacias()) {
-				int id = Integer.parseInt(cajaidCliente.getText());
-				long numTel = Long.parseLong(cajaNumTel.getText());
-				Cliente c = new Cliente(id, cajaNombre.getText(), cajaCorreo.getText(), numTel, cajaDireccion.getText());
-				if(ConexionBD.agregarCliente(c)) {
-					JOptionPane.showMessageDialog(null, "Se agrego el cliente correctamente");
-					actualizarTabla();
-					reestablecer(cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
-				}else {
-					JOptionPane.showMessageDialog(rootPane, "No se agrego el cliente", "ERROR!", JOptionPane.ERROR_MESSAGE);
+		ClienteDAO clDAO = new ClienteDAO();
+		
+		if(e.getSource() == btnBuscar) {
+			if(!cajaidCliente.getText().isEmpty()) {
+				clDAO.setFiltro(Integer.parseInt(cajaidCliente.getText()));
+				Thread h1 = new Thread(clDAO);
+				h1.start();
+				Cliente c = clDAO.buscarClientes(Integer.parseInt(cajaidCliente.getText())); 
+				if(c != null) {
+					//c = clDAO.buscarClientes(Integer.parseInt(cajaidCliente.getText()));
+					cajaNombre.setText(c.getNombre());
+					cajaCorreo.setText(c.getCorreoE());
+					cajaNumTel.setText(c.getNumTel());
+					cajaDireccion.setText(c.getDireccion());
+					btnEliminar.setEnabled(true);
 				}
+			}
+		}
+		else if(e.getSource() == btnEliminar) {
+			if(clDAO.eliminarRegistro(Integer.parseInt(cajaidCliente.getText()))) {
+				JOptionPane.showMessageDialog(null, "Cliente eliminado exitosamente");
+				actualizarTabla();
+				reestablecer(cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
 			}else {
-				JOptionPane.showMessageDialog(null, "Por favor llena todos los campos");
+				JOptionPane.showMessageDialog(null, "No se pudo eliminar al cliente");
 			}
 		}else if(e.getSource() == btnBorrar) {
 			reestablecer(cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
@@ -442,13 +460,10 @@ class BajasClientes extends JFrame implements ActionListener{
 		
 		return true;
 	}
-}
+}//clase bajasClientes
 
 class Interfaz extends JFrame implements ActionListener{
 	ConexionBD conexion = ConexionBD.getInstace();
-	ClienteDAO clDAO = ClienteDAO.getInstance();
-	CompraProductoDAO comProdDAO = CompraProductoDAO.getInstance();
-	ProductoDAO prodDAO = ProductoDAO.getInstance();
 	
 	JMenuBar menuBar = new JMenuBar();
 	JMenu cliente = new JMenu("Cliente");
