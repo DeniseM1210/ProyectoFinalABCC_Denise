@@ -296,12 +296,12 @@ class BajasClientes extends JFrame implements ActionListener{
 		cajaDireccion.setBounds(90, 170, 200, 20);
 		add(cajaDireccion);
 		
-		btnEliminar = new JButton(iconoAgregar);
-		btnEliminar.setIcon(new ImageIcon(iconoAgregar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+		btnEliminar = new JButton(iconoEliminar);
+		btnEliminar.setIcon(new ImageIcon(iconoEliminar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 		btnEliminar.setBounds(380, 30, 50, 50);
-		btnAgregar.setBackground(Color.LIGHT_GRAY);
-		btnAgregar.addActionListener(this);
-		add(btnAgregar);
+		btnEliminar.setBackground(Color.LIGHT_GRAY);
+		btnEliminar.addActionListener(this);
+		add(btnEliminar);
 		
 		btnBorrar = new JButton(iconoLimpiar);
 		btnBorrar.setIcon(new ImageIcon(iconoLimpiar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
@@ -377,7 +377,7 @@ class BajasClientes extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnAgregar) {
+		if(e.getSource() == btnEliminar) {
 			if(validarCajasVacias()) {
 				int id = Integer.parseInt(cajaidCliente.getText());
 				long numTel = Long.parseLong(cajaNumTel.getText());
@@ -574,6 +574,11 @@ class Interfaz extends JFrame implements ActionListener{
 			AltasCliente ac = new AltasCliente();
 			dp.add(ac);
 			ac.setVisible(true);
+			add(dp);
+		}else if(e.getSource() == bajasCli) {
+			BajasClientes bc = new BajasClientes();
+			dp.add(bc);
+			bc.setVisible(true);
 			add(dp);
 		}
 		
