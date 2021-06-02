@@ -620,17 +620,34 @@ class CambiosClientes extends JInternalFrame implements ActionListener{
 					cajaNumTel.setText(c.getNumTel());
 					cajaDireccion.setText(c.getDireccion());
 					btnGuardarCambios.setEnabled(true);
+					
+					cajaNombre.setEnabled(true);
+					cajaCorreo.setEnabled(true);
+					cajaNumTel.setEnabled(true);
+					cajaDireccion.setEnabled(true);
 				}
 			}
 		}
 		else if(e.getSource() == btnGuardarCambios) {
-			if(clDAO.eliminarRegistro(Integer.parseInt(cajaidCliente.getText()))) {
-				JOptionPane.showMessageDialog(null, "Cliente eliminado exitosamente");
+			Cliente c = new Cliente();
+			c.setNombre(cajaNombre.getText());
+			c.setCorreoE(cajaCorreo.getText());
+			c.setNumTel(cajaNumTel.getText());
+			c.setDireccion(cajaDireccion.getText());
+			
+			boolean bandera = clDAO.modificarCliente(c);
+			if(bandera) {
+				JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
 				actualizarTabla();
-				reestablecer(cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
+				reestablecer(cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
+				cajaNombre.setEnabled(false);
+				cajaCorreo.setEnabled(false);
+				cajaNumTel.setEnabled(false);
+				cajaDireccion.setEnabled(false);
 			}else {
-				JOptionPane.showMessageDialog(null, "No se pudo eliminar al cliente");
+				JOptionPane.showMessageDialog(null, "No se modifico el cliente");
 			}
+			btnGuardarCambios.setEnabled(false);
 		}else if(e.getSource() == btnBorrar) {
 			reestablecer(cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
 		}else if(e.getSource() == btnCancelar) {

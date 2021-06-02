@@ -24,7 +24,7 @@ public class ClienteDAO implements Runnable {
 		return resultado;
 	}
 	
-	public boolean modificarCliente(Cliente c, boolean flags[]) {
+	public boolean modificarCliente(Cliente c) {
 		boolean resultado = false;
 		
 		resultado = ConexionBD.actualizarCliente(c);

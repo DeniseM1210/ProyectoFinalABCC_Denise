@@ -106,7 +106,7 @@ public class ConexionBD {
 	public static boolean actualizarCliente(Cliente c) {
 		
 		try {
-			pstm = conexion.prepareStatement("UPDATE cliente SET correo_electronico = ?, num_telefono = ?, direccion = ? WHERE id_cliente = '" + c.getIdCliente() + "'" );
+			pstm = conexion.prepareStatement("UPDATE cliente SET nombre = ?, correo_electronico = ?, num_telefono = ?, direccion = ? WHERE id_cliente = '" + c.getIdCliente() + "'" );
 			pstm.setString(1, c.getNombre());
 			pstm.setString(2, c.getCorreoE());
 			pstm.setString(3, c.getNumTel());
