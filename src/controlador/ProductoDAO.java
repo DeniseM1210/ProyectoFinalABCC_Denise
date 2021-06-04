@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import conexionBD.ConexionBD2;
 import modelo.Producto;
 
-public class ProductoDAO implements Runnable{
+public class ProductoDAO{
 	ConexionBD2 conexion;
-	private int filtro;
 	
 	public ProductoDAO() {
 		conexion = new ConexionBD2();
@@ -39,12 +38,6 @@ public class ProductoDAO implements Runnable{
 				resultado = conexion.ejecutarInstruccion(sql);
 		
 		return resultado;
-	}
-	
-
-	@Override
-	public void run() {
-		
 	}
 	
 

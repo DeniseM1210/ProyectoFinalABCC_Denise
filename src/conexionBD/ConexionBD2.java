@@ -60,4 +60,6 @@ public class ConexionBD2 {
 		}
 		return rs;
 	}
+	
+	
 }

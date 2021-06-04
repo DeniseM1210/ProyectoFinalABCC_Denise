@@ -8,7 +8,7 @@ import conexionBD.ConexionBD2;
 import modelo.Cliente;
 import vista.VentanaInicio;
 
-public class ClienteDAO implements Runnable {
+public class ClienteDAO{
 	ConexionBD2 conexion;
 	
 	public ClienteDAO() {
@@ -41,11 +41,4 @@ public class ClienteDAO implements Runnable {
 	}
 	
 	
-	@Override
-	public void run() {
-		
-		
-	}
-
-
 }

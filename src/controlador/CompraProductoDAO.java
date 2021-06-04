@@ -8,7 +8,7 @@ import conexionBD.ConexionBD2;
 import modelo.CompraProducto;
 
 
-public class CompraProductoDAO implements Runnable {
+public class CompraProductoDAO{
 	ConexionBD2 conexion;
 	
 	public CompraProductoDAO() {
@@ -38,12 +38,6 @@ public class CompraProductoDAO implements Runnable {
 		
 		return resultado;
 		}
-	
-	@Override
-	public void run() {
-		
-		
-	}
 	
 	
 }
