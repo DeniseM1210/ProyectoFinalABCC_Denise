@@ -4,102 +4,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import conexionBD.ConexionBD;
+import conexionBD.ConexionBD2;
 import modelo.Producto;
 
-class ConsultaProductos implements Runnable{
-	ArrayList<Producto> listaProductos = new ArrayList<Producto>();
-	String filtro;
+public class ProductoDAO implements Runnable{
+	ConexionBD2 conexion;
+	private int filtro;
 	
-	public ConsultaProductos(String filtro) {
-		this.filtro = filtro;
+	public ProductoDAO() {
+		conexion = new ConexionBD2();
 	}
-
-	@Override
-	public void run() {
-		ResultSet rs;
 		
-		rs = ConexionBD.ejecutarConsulta(filtro);
-		
-		try {
-			if(rs.next()) {
-				do {
-					listaProductos.add(new Producto(rs.getString(1),
-							rs.getString(2),
-							rs.getInt(3), 
-							rs.getString(4)));
-				}while(rs.next());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	public ArrayList<Producto> getListaProductos() {
-		return listaProductos;
-	}
-
-	public void setListaProductos(ArrayList<Producto> listaProductos) {
-		this.listaProductos = listaProductos;
-	}
-
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
-	
-	
-}
-
-public class ProductoDAO{
-	
-	private static ProductoDAO productoDAO = null;
-	
-	private ProductoDAO() {
-		
-	}
-	
-	public static synchronized ProductoDAO getInstance() {
-		if(productoDAO == null) {
-			productoDAO = new ProductoDAO();
-		}
-		return productoDAO;
-	}
-	
 	public boolean insertarProducto(Producto p) {
 		boolean resultado = false;
-		resultado = ConexionBD.agregarProducto(p);
+
+		String sql = "INSERT INTO producto VALUES("+ p.getClave() + ",'"+ p.getDescripcion()+"',"
+				+p.getPrecio()+",'"+p.getDisponibilidad()+"');";
+		resultado = conexion.ejecutarInstruccion(sql);
+
 		return resultado;
 	}
 	
 	public boolean eliminarRegistro(int idProducto) {
 		boolean resultado = false;
-		String sql = "DELETE FROM producto WHERE clave_producto = " + idProducto;
-		resultado = ConexionBD.eliminarRegistro(sql);
+		String sql = "DELETE FROM producto WHERE clave_producto = \"" + idProducto + "\"";
+		resultado = conexion.ejecutarInstruccion(sql);
 		return resultado;
 	}
 	
-	public boolean modificarProducto(Producto p, boolean flags[]) {
+	public boolean modificarProducto(Producto p) {
 		boolean resultado = false;
-		resultado = ConexionBD.actualizarProducto(p);
+		String sql = "UPDATE producto SET descripcion = '" + p.getDescripcion() + "', precio = " + p.getPrecio() +", disponibilidad = '"+
+				p.getDisponibilidad() + "' WHERE clave_producto = " + p.getClave() + "";
+				resultado = conexion.ejecutarInstruccion(sql);
 		
 		return resultado;
 	}
 	
-	public synchronized ArrayList<Producto> buscarProductos(String filtro){
-		ConsultaProductos cp = new ConsultaProductos(filtro);
-		Thread h1 = new Thread(cp);
-		h1.start();
-		try {
-			h1.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return cp.getListaProductos();
+
+	@Override
+	public void run() {
+		
 	}
 	
 

@@ -1,15 +1,15 @@
 package modelo;
 
 public class CompraProducto {
-	private String claveProducto;
+	private int claveProducto;
 	private String fecha;
 	private String nombreProducto;
-	private int cantidad;
+	private byte cantidad;
 	private String color;
 	
 	public CompraProducto() {}
 	
-	public CompraProducto(String claveProducto, String fecha, String nombreProducto, int cantidad, String color) {
+	public CompraProducto(int claveProducto, String fecha, String nombreProducto, byte cantidad, String color) {
 		super();
 		this.claveProducto = claveProducto;
 		this.fecha = fecha;
@@ -18,11 +18,11 @@ public class CompraProducto {
 		this.color = color;
 	}
 
-	public String getClaveProducto() {
+	public int getClaveProducto() {
 		return claveProducto;
 	}
 
-	public void setClaveProducto(String claveProducto) {
+	public void setClaveProducto(int claveProducto) {
 		this.claveProducto = claveProducto;
 	}
 
@@ -42,11 +42,11 @@ public class CompraProducto {
 		this.nombreProducto = nombreProducto;
 	}
 
-	public int getCantidad() {
+	public byte getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(byte cantidad) {
 		this.cantidad = cantidad;
 	}
 

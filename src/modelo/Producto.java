@@ -1,12 +1,12 @@
 package modelo;
 
 public class Producto {
-	private String clave;
+	private int clave;
 	private String descripcion;
-	private double precio;
+	private String precio;
 	private String disponibilidad;
 	
-	public Producto(String clave, String descripcion, double precio, String disponibilidad) {
+	public Producto(int clave, String descripcion, String precio, String disponibilidad) {
 		super();
 		this.clave = clave;
 		this.descripcion = descripcion;
@@ -14,11 +14,14 @@ public class Producto {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public String getClave() {
+	public Producto() {
+	}
+
+	public int getClave() {
 		return clave;
 	}
 
-	public void setClave(String clave) {
+	public void setClave(int clave) {
 		this.clave = clave;
 	}
 
@@ -30,11 +33,11 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
-	public double getPrecio() {
+	public String getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
 

@@ -11,6 +11,7 @@ public class Cliente {
 	
 	public Cliente(int idCliente, String nombre, String correoE, String numTel, String direccion) {
 		super();
+		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.correoE = correoE;
 		this.numTel = numTel;
@@ -60,9 +61,11 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", correoE=" + correoE + ", numTel=" + numTel + ", direccion=" + direccion
-				+ "]";
+		return "Cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", correoE=" + correoE + ", numTel=" + numTel
+				+ ", direccion=" + direccion + "]";
 	}
+
+	
 	
 	
 	
