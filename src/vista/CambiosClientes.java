@@ -192,7 +192,6 @@ class CambiosClientes extends JInternalFrame implements ActionListener{
 			}else {
 				JOptionPane.showMessageDialog(null, "No se modifico el cliente");
 			}
-			btnGuardarCambios.setEnabled(false);
 		}else if(e.getSource() == btnBorrar) {
 			reestablecer(cajaidCliente, cajaNombre, cajaCorreo, cajaNumTel, cajaDireccion);
 		}else if(e.getSource() == btnCancelar) {

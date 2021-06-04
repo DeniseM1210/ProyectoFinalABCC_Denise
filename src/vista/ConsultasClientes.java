@@ -41,7 +41,7 @@ class ConsultasClientes extends JInternalFrame implements ActionListener{
 		this.getContentPane().setBackground(Color.LIGHT_GRAY);
 		setTitle("Consultas Clientes");
 		
-		JLabel lblTexto = new JLabel("Cambios Clientes");
+		JLabel lblTexto = new JLabel("Consultas Clientes");
 		lblTexto.setBounds(200, 10, 200, 20);
 		lblTexto.setFont(new Font("Arial", Font.BOLD, 18));
 		add(lblTexto);

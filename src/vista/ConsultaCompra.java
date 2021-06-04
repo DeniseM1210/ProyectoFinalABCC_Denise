@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
@@ -113,28 +114,20 @@ class ConsultaCompra extends JInternalFrame implements ActionListener{
 		add(sp);
 		
 		//Validacion
-		cajaClaveProd.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char caracter = e.getKeyChar();
-				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
-					e.consume();
-				}
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {}
-		});
+		cajaClaveProd.addKeyListener(new KeyAdapter(){
+			   public void keyTyped(KeyEvent e){
+				      char caracter = e.getKeyChar();
+				      if(((caracter < 48) || (caracter > 57)) &&(caracter != '\b')){
+				         e.consume(); 
+				      }
+				   }
+				});
 		
 		cajaNombreProd.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char car = e.getKeyChar();
-				if(Character.isLetter(car) || Character.isSpaceChar(car)) {
+				char caracter = e.getKeyChar();
+				if(Character.isLetter(caracter) || Character.isSpaceChar(caracter)) {
 				}else {
 					e.consume();
 				}
@@ -147,17 +140,18 @@ class ConsultaCompra extends JInternalFrame implements ActionListener{
 		});
 		
 		cajaColor.addKeyListener(new KeyListener() {
+			
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char car = e.getKeyChar();
-				if(Character.isLetter(car) || Character.isSpaceChar(car)) {
+				char caracter = e.getKeyChar();
+				if(Character.isLetter(caracter) || Character.isSpaceChar(caracter)) {
 				}else {
 					e.consume();
 				}
 			}
+			
 			@Override
 			public void keyReleased(KeyEvent e) {}
-			
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});

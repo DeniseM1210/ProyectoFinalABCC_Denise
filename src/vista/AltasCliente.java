@@ -151,7 +151,6 @@ class AltasCliente extends JInternalFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnAgregar) {
-			System.out.println(cajaidCliente.getText());
 			ClienteDAO cDAO = new ClienteDAO();
 			String idcli = cajaidCliente.getText();
 			if(cajaidCliente.getText().equals("")) {
@@ -159,7 +158,6 @@ class AltasCliente extends JInternalFrame implements ActionListener{
 			}else {
 				int id = Integer.parseInt(idcli);
 				Cliente c = new Cliente(id, cajaNombre.getText(), cajaCorreo.getText(), cajaNumTel.getText(), cajaDireccion.getText());
-				System.out.println(c.toString());
 				if(cDAO.insertarCliente(c)) {
 					JOptionPane.showMessageDialog(null, "Se agrego el cliente correctamente");
 					actualizarTabla();

@@ -113,7 +113,23 @@ class CambiosProducto extends JInternalFrame implements ActionListener{
 		add(sp);
 		
 		//Validacion
-		cajaClave.addKeyListener(new KeyListener() {
+cajaClave.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+					e.consume();
+				}
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
+		cajaPrecio.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -130,7 +146,7 @@ class CambiosProducto extends JInternalFrame implements ActionListener{
 			public void keyPressed(KeyEvent e) {}
 		});
 		
-		cajaDescripcion.addKeyListener(new KeyListener() {
+		cajaDispo.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char car = e.getKeyChar();
@@ -142,22 +158,6 @@ class CambiosProducto extends JInternalFrame implements ActionListener{
 			@Override
 			public void keyReleased(KeyEvent e) {}
 			
-			@Override
-			public void keyPressed(KeyEvent e) {}
-		});
-		
-		cajaDispo.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char caracter = e.getKeyChar();
-				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
-					e.consume();
-				}
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {}
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});
@@ -177,13 +177,12 @@ class CambiosProducto extends JInternalFrame implements ActionListener{
 			Producto p = new Producto(id, cajaDescripcion.getText(), cajaPrecio.getText(), cajaDispo.getText());
 			
 			if(pDAO.modificarProducto(p)) {
-				JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
+				JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
 				actualizarTabla();
 				reestablecer(cajaDescripcion, cajaPrecio, cajaDispo);
 			}else {
-				JOptionPane.showMessageDialog(null, "No se modifico el cliente");
+				JOptionPane.showMessageDialog(null, "No se modifico el producto");
 			}
-			btnGuardarCambios.setEnabled(false);
 		}else if(e.getSource() == btnBorrar) {
 			reestablecer(cajaClave, cajaDescripcion, cajaPrecio, cajaDispo);
 		}else if(e.getSource() == btnCancelar) {

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
@@ -125,28 +126,20 @@ class CambiosCompra extends JInternalFrame implements ActionListener{
 		add(sp);
 		
 		//Validacion
-		cajaClaveProd.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char caracter = e.getKeyChar();
-				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
-					e.consume();
-				}
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {}
-		});
+		cajaClaveProd.addKeyListener(new KeyAdapter(){
+			   public void keyTyped(KeyEvent e){
+				      char caracter = e.getKeyChar();
+				      if(((caracter < 48) || (caracter > 57)) &&(caracter != '\b')){
+				         e.consume(); 
+				      }
+				   }
+				});
 		
 		cajaNombreProd.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char car = e.getKeyChar();
-				if(Character.isLetter(car) || Character.isSpaceChar(car)) {
+				char caracter = e.getKeyChar();
+				if(Character.isLetter(caracter) || Character.isSpaceChar(caracter)) {
 				}else {
 					e.consume();
 				}
@@ -163,7 +156,8 @@ class CambiosCompra extends JInternalFrame implements ActionListener{
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char caracter = e.getKeyChar();
-				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+				if(Character.isLetter(caracter) || Character.isSpaceChar(caracter)) {
+				}else {
 					e.consume();
 				}
 			}
@@ -190,14 +184,14 @@ class CambiosCompra extends JInternalFrame implements ActionListener{
 			CompraProductoDAO cpDAO = new CompraProductoDAO();
 
 			if(cpDAO.modificarCompraProducto(cp)) {
-				JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
+				JOptionPane.showMessageDialog(null, "Compra modificada correctamente");
 				actualizarTabla();
 				reestablecer(cajaFecha, cajaNombreProd, cajaColor, comboCantidad);
 				cajaFecha.setEnabled(false);
 				cajaNombreProd.setEnabled(false);
 				cajaColor.setEnabled(false);
 			}else {
-				JOptionPane.showMessageDialog(null, "No se modifico el cliente");
+				JOptionPane.showMessageDialog(null, "No se modifico la compra");
 			}
 		}else if(e.getSource() == btnBorrar) {
 			reestablecer(cajaClaveProd, cajaFecha, cajaNombreProd, cajaColor);

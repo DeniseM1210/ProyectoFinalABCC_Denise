@@ -159,11 +159,11 @@ class AltasProducto extends JInternalFrame implements ActionListener{
 				int id = Integer.parseInt(cajaClaveProd.getText());
 				Producto p = new Producto(id, cajaDescripcion.getText(), cajaPrecio.getText(), cajaDisponibilidad.getText());
 				if(pDAO.insertarProducto(p)) {
-					JOptionPane.showMessageDialog(null, "Se agrego el cliente correctamente");
+					JOptionPane.showMessageDialog(null, "Se agrego el producto correctamente");
 					actualizarTabla();
 					reestablecer(cajaClaveProd, cajaDescripcion, cajaPrecio, cajaDisponibilidad);
 				}else {
-					JOptionPane.showMessageDialog(rootPane, "No se agrego el cliente", "ERROR!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(rootPane, "No se agrego el producto", "ERROR!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}else if(e.getSource() == btnBorrar) {

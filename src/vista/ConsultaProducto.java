@@ -102,7 +102,23 @@ class ConsultaProducto extends JInternalFrame implements ActionListener{
 		add(sp);
 		
 		//Validacion
-		cajaClave.addKeyListener(new KeyListener() {
+cajaClave.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+					e.consume();
+				}
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
+		cajaPrecio.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -135,21 +151,6 @@ class ConsultaProducto extends JInternalFrame implements ActionListener{
 			public void keyPressed(KeyEvent e) {}
 		});
 		
-		cajaPrecio.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char caracter = e.getKeyChar();
-				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
-					e.consume();
-				}
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {}
-			@Override
-			public void keyPressed(KeyEvent e) {}
-		});
 		
 		setVisible(false);
 	}

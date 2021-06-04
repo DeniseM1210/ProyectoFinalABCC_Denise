@@ -19,7 +19,7 @@ public class ConexionBD2 {
 			
 			conexion = DriverManager.getConnection(URL, "root", "nanami777");
 		
-			System.out.println("Conexion establecida");
+			//System.out.println("Conexion establecida");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error de DRIVER");
 		} catch (SQLException e) {

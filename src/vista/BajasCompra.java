@@ -142,7 +142,7 @@ class BajasCompra extends JInternalFrame implements ActionListener{
 			public void keyPressed(KeyEvent e) {}
 		});
 		
-		cajaFecha.addKeyListener(new KeyListener() {
+		cajaColor.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char car = e.getKeyChar();
@@ -158,21 +158,23 @@ class BajasCompra extends JInternalFrame implements ActionListener{
 			public void keyPressed(KeyEvent e) {}
 		});
 		
-		cajaColor.addKeyListener(new KeyListener() {
-			
+		cajaNombreProd.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char caracter = e.getKeyChar();
-				if(((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+				char car = e.getKeyChar();
+				if(Character.isLetter(car) || Character.isSpaceChar(car)) {
+				}else {
 					e.consume();
 				}
 			}
-			
 			@Override
 			public void keyReleased(KeyEvent e) {}
+			
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});
+		
+		
 		
 		setVisible(false);
 	}
